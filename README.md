@@ -3,6 +3,10 @@
 This is a Pacmann Academy SQL & Data Wrangling project involving visual examination of datasets, problem identification, and problem solving. 
 First, introduce the Olist company and the datasets. Olist is a Brazilian e-commerce company that provides solutions for online sales and e-commerce services. It offers a variety of technologies, tools, and connectors to help streamline and speed online business processes. Finally, provide remedies to the challenges and a benefit evaluation. The Python programming language is utilized in this project for data analysis and graphics.
 
+> Disclaimer : I'am using dataset from learning management system in Pacmann Academy, but we can use the same dataset from [kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/download?datasetVersionNumber=2)
+
+![olist](img/olist-img.jpg)
+
 ## Objectives
 - Number of Order per Each Product Category: Identifying the number of orders received by Olist in each product category helps in understanding the popularity of a particular product category.
 - The most item of product categories: Analyze the top product categories to understand the extent to which these products contribute to Olist's revenue and popularity.
@@ -462,7 +466,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Check duplicate data of dataframe
       df_olist[df_olist.duplicated(keep=False)]
       ```
-      ![df_cuplicate]
+      ![df_cuplicate](img/duplicate_df.png)
 
       ```
       # Delete duplicate data
@@ -636,7 +640,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![total-revenue-per-each-product-category]
+     ![total-revenue-per-each-product-category](img/total_revenue_per_each_product_category.png)
 
      > ***Food & Beverages has the lowest revenue at 82544.05, while electronics is the product category with the highest revenue at 2794148.72***
 
@@ -737,7 +741,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![payment-type-distribution]
+     ![payment-type-distribution](img/payment_type_dist.png)
 
      > ***It seems obvious that the majority of customers (73.9%) pay with credit cards while placing orders.***
 
@@ -793,7 +797,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![payment-installment]
+     ![payment-installment](img/payment_installment_dist.png)
 
      > ***It is apparent that the majority of clients (49997) pay by credit card in 1-month installments when placing an order.***
      
