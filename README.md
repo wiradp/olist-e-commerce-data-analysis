@@ -33,7 +33,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
 ### Let's start by following the steps above
 
 1. Dataset
-![data-schema](img/data-schema.png "Data Schema"
+![data-schema](img/data-schema.png "Data Schema")
     - Accessing dataset
       ```
       # sqlite3 used to integrate SQLite database with Python
@@ -91,7 +91,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           print(f' Column    : {column_name}')
         ```
       
-        ![table-name]
+        ![table-name](img/table_name.png "Table & Columns")
 
     - Create Dataframe
       ```
@@ -239,7 +239,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       nan_df_olist
       ```
 
-      ![NaN-Identification]
+      ![NaN-Identification](img/nan-identify.png "NaN Identify")
 
       ```
       # Generate a summary showing how many NaN values are in the 'product_length_cm', 'product_height_cm', and 'product_width_cm' columns 
@@ -257,7 +257,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
 
       filtered_rows
       ```
-      ![NaN-output]
+      ![NaN-output](img/nan-output.png "NaN output")
 
     - Calculate the mode from product category 'baby' only to fill the NaN values
       ```
@@ -309,7 +309,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Generate descriptive stastistic
       df_olist.describe()  
       ```
-      ![df-describe]
+      ![df-describe](img/df-describe.png "df describe")
 
       In the price column, it can be seen that the 75% data and the max data have a very large range. We can assume this is an outlier
       ```
@@ -394,8 +394,411 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           plt.show()
           ```
           ![dist-data-price-wo-outlier](img/dist_data_price_wo_outlier.png "Distribution Data Price w/o outlier")
+          > _Now the graphic looks positively skewed_
           
+    - Identify inconsistent format
+      ```
+      # Identify inconsistent format in 'product_category_name_english'
+
+      # Show the data
+      df_olist['product_category_name_english'].unique()
+      ```
+      ```
+      Output:
+      array(['office_furniture', 'housewares', 'home_confort', 'sports_leisure',
+       'computers_accessories', 'toys', 'furniture_decor', 'auto',
+       'air_conditioning', 'telephony', 'health_beauty', 'garden_tools',
+       'pet_shop', 'bed_bath_table', 'baby', 'watches_gifts',
+       'kitchen_dining_laundry_garden_furniture', 'perfumery', 'art',
+       'stationery', 'fashio_female_clothing', 'consoles_games',
+       'construction_tools_lights', 'food_drink', 'drinks', 'cool_stuff',
+       'fashion_bags_accessories', 'home_construction',
+       'luggage_accessories', 'electronics', 'home_appliances_2',
+       'fashion_male_clothing', 'small_appliances',
+       'small_appliances_home_oven_and_coffee', 'books_general_interest',
+       'home_appliances', 'costruction_tools_tools',
+       'signaling_and_security', 'musical_instruments',
+       'construction_tools_construction', 'music', 'fashion_shoes',
+       'industry_commerce_and_business', 'fashion_underwear_beach',
+       'dvds_blu_ray', 'construction_tools_safety', 'food',
+       'fixed_telephony', 'furniture_living_room',
+       'tablets_printing_image', 'market_place', 'christmas_supplies',
+       'agro_industry_and_commerce', 'costruction_tools_garden',
+       'computers', 'furniture_bedroom', 'audio', 'books_imported',
+       'books_technical', 'party_supplies',
+       'furniture_mattress_and_upholstery', 'la_cuisine', 'flowers',
+       'diapers_and_hygiene', 'cine_photo', 'cds_dvds_musicals',
+       'fashion_sport', 'home_comfort_2', 'arts_and_craftmanship',
+       'fashion_childrens_clothes', 'security_and_services'], dtype=object)
+      ```
+      ```
+      # Create a varialbe to replace inconsistent name
+      replace_product_name = {'home_confort':'home_comfort', 'home_comfort_2':'home_comfort', 'home_appliances_2':'home_appliances'}
+
+      # Replace it into dataframe
+      df_olist['product_category_name_english'].replace(replace_product_name, inplace=True)
+      ```
+
+      ```
+      # Generate unique value in column order_purchase_timestamp 
+      df_olist['order_purchase_timestamp'].unique()
+      ```
+      ```
+      Output:
+      array(['2017-05-16 15:05:35', '2017-11-09 00:50:13',
+       '2017-05-07 20:11:26', ..., '2017-05-17 17:44:34',
+       '2017-01-26 11:09:00', '2017-09-17 16:51:43'], dtype=object)
+      ```
+      > [!NOTE]
+      > - _From the information above, it can be seen that the column does not match the representation of the data type of the column_
+      > - _order_purchase_timestamp: Indicates the purchase timestamp._
+      > - _Because the value in this column begins with the year, we will change the yearfirst parameter in the to_datetime function._
+      ```
+      # Convert order_purchase_timestamp
+      df_olist['order_purchase_timestamp'] = pd.to_datetime(df_olist['order_purchase_timestamp'], errors='coerce', yearfirst=True)
+      ```
+    - Identify duplicate data
+      ```
+      # Check duplicate data of dataframe
+      df_olist[df_olist.duplicated(keep=False)]
+      ```
+      ![df_cuplicate]
+
+      ```
+      # Delete duplicate data
+      df_olist = df_olist.drop_duplicates(keep='first').reset_index(drop=True)
+      ```
+
+3. Exploring Data & Analysis
+   - Number of Order per Each Product Category
+     ```
+     # Visualize the data of product category with bar plots 
+
+     plt.figure(figsize=(10,7))
+     ax = sns.barplot(x=df_olist['product_category'].value_counts().values, y=df_olist['product_category'].value_counts().index, palette='Set2')
+     plt.title('Number of order per each product category')
+     max_values = df_olist.groupby('product_category')['product_category'].count().max()
+     min_values = df_olist.groupby('product_category')['product_category'].count().min()
+     for index, value in enumerate(df_olist['product_category'].value_counts().values):
+        if value == max_values:
+            ax.text(value, index, f'{value}', ha='right', va='center')
+        if value == min_values:
+            ax.text(value, index, f'{value}', ha='left', va='center')
+     plt.show()
+     ```
+     ![no-each-product-ccategory](img/no_of_order_per_each_category.png)
+     > ***Electronics as the most ordered product category with 25033 orders and food & drinks as the least ordered product category with 1008 orders.***
+   - The most item in product categories
+     ```
+     # Filter max value count in product category
+     df_olist['product_category'].value_counts().idxmax()
+     ```
+
+     ```
+     Output:
+     'Electronics'
+     ```
+
+     ```
+     # Show item of product categories in Electronics
+
+     # Filter DataFrame for product_category equal to "Electronics"
+     electronic_df = df_olist[df_olist['product_category'] == 'Electronics']
+    
+     # Count the number of occurrences of each product_category_name_english
+     category_count = electronic_df['product_category_name_english'].value_counts().reset_index()
+     category_count.columns = ['product_category_name_english', 'count']
+    
+     # Sort DataFrame descendingly by its number
+     category_count = category_count.sort_values(by='count', ascending=False)
+     max_category_count = category_count['count'].max()
+    
+     # Visualize the data with bar plots
+     plt.figure(figsize=(12, 8))
+     ax = sns.barplot(x='count', y='product_category_name_english', data=category_count, palette='Set2')
+     plt.title('Product Categories in Electronics')
+     plt.ylabel('Product Category Name ')
+     highest_count_category = category_count[category_count['count'] == max_category_count]['product_category_name_english'].values[0]
+     ax.text(max_category_count, 0, f'{max_category_count}', ha='right', va='center', fontsize=10)
+     plt.show()
+     ```
+     ![most-item-product-category](img/product_category_in_electronic.png)
+     > ***The product category's most ordered items, totaling 6740, are evidently computer accessories.***
+     
+   - Top 3 for Each Product Category Name by Product Category
+     ```
+     # Grouped the data based on 'product_category' and 'product_category_name_english', then counted the number.
+     category_counts = df_olist.groupby(['product_category', 'product_category_name_english']).size().reset_index(name='count')
+    
+     # Filtering the top 3 product_category_name_english in each product_category
+     top_categories = category_counts.groupby('product_category').apply(lambda x: x.nlargest(3, 'count')).reset_index(drop=True)
+    
+     # Visualize for each product_category with bar plot
+     plt.figure(figsize=(12, 8))
+     sns.barplot(data=top_categories, x='count', y='product_category_name_english', hue='product_category', palette='Set2')
+     plt.xlabel('Count')
+     plt.ylabel('Product Category Name')
+     plt.title('Top 3 Product Categories by Product Category')
+     plt.show()
+     ```
+     ![top-3-each-product-category](img/top_3_item_by_product_category.png)
+     
+     > ***Health Beauty, Stationery, Computer accessories, Sport Leisure, Cool Stuff, Food, Bed Bath Table, Housewares, Construction tools construction are the most item ordered for each product category***
+
+   - Top 10 Customer state capacity
+     ```
+     # Show Top 10 customer state capacities
+     plt.figure(figsize=(10,7))
+     sns.barplot(x=df_olist['customer_state'].value_counts().values[:10], y=df_olist['customer_state'].value_counts().index[:10], palette='Set2')
+     plt.title('Top 10 Customer State Capacity')
+     plt.show()
+     ```
+     ![top-10-customer-state-capacity](img/top_10_customer_state_capacity.png)
+
+     > ***It can be seen that the state SP (São Paulo) is the country that makes the most orders of 41115***
+
+   - Revenue for each state
+     ```
+     # Group state by payment value
+     state_revenue = df_olist.groupby('customer_state')['payment_value'].sum().reset_index()
+    
+     # Sorting descending state revenue
+     state_revenue = state_revenue.sort_values(by='payment_value', ascending=False)
+    
+     # Visualize state revenue with bar plot
+     plt.figure(figsize=(12, 6))
+     sns.barplot(x='customer_state', y='payment_value', data=state_revenue, palette='Set2')
+     plt.title('Total Revenue per State')
+     plt.xlabel('Customer State')
+     plt.ylabel('Total Revenue (Million)')
+     plt.xticks(rotation=45)
+     plt.show()
+     ```
+
+     ![total-revenue-each-state](img/total_revenue_per_state.png)
+
+     > ***SP(São Paulo) is the state with the highest revenue of 4493263.20 and RR (Roraima) has the lowest revenue of 6678.50***
+
+   - Monthly Revenue
+     ```
+     # Extract order_purchase_timestamp into order_month
+     df_olist['order_month'] = df_olist['order_purchase_timestamp'].dt.to_period('M').dt.to_timestamp()
+    
+     # Groupby order_month by payment_value to get monthly revenue
+     monthly_revenue = df_olist.groupby('order_month')['payment_value'].sum().reset_index()
+    
+     plt.figure(figsize=(12, 6))
+     sns.set_theme(context='notebook', style='darkgrid', palette='deep', font='sans-serif', font_scale=1, color_codes=True, rc=None)
+     sns.lineplot(x='order_month', y='payment_value', data=monthly_revenue)
+     plt.title('Monthly Revenue')
+     plt.xlabel('Month')
+     plt.ylabel('Revenue (Million)')
+     plt.xticks(rotation=45)  # To rotate x-axis labels for easier reading
+    
+     # Find the month with the highest revenue
+     max_revenue_point = monthly_revenue.loc[monthly_revenue['payment_value'].idxmax()]
+     min_revenue_point = monthly_revenue.loc[monthly_revenue['payment_value'].idxmin()]
+    
+     # Annotate the highest revenue point
+     plt.annotate(f'Highest: {max_revenue_point["payment_value"]:.2f}', 
+                 xy=(max_revenue_point['order_month'], max_revenue_point['payment_value']),
+                 xytext=(max_revenue_point['order_month'], max_revenue_point['payment_value'] + 1000), 
+                 arrowprops=dict(arrowstyle='->'))
+    
+     # Annotate the lowest revenue point
+     plt.annotate(f'Lowest: {min_revenue_point["payment_value"]:.2f}', 
+                 xy=(min_revenue_point['order_month'], min_revenue_point['payment_value']),
+                 xytext=(min_revenue_point['order_month'], min_revenue_point['payment_value'] - 1000), 
+                 arrowprops=dict(arrowstyle='->'))
+    
+     plt.show()
+     ```
+
+     ![monthly-revenue](img/monthly_revenue.png)
+
+     > ***It is apparent that November 2017 had the largest revenue, totaling 879899.45, while December 2012 had the lowest revenue, totaling 19.62***
+
+   - Total revenue per each product category
+     ```
+     # Groupby product_category with paymeny_value to get revenue product category
+     revenue_product_cat = df_olist.groupby('product_category')['payment_value'].sum().reset_index()
+    
+     # Sorting descending revenue product category
+     revenue_product_cat = revenue_product_cat.sort_values(by='payment_value', ascending=False)
+    
+     #Visualisize with barplot
+     plt.figure(figsize=(12,7))
+     sns.barplot(x='product_category', y='payment_value', data=revenue_product_cat, palette='Set2')
+     plt.title('Total Revenue Per Each Product Category')
+     plt.xlabel('Product Category')
+     plt.ylabel('Total Revenue (Million)')
+     plt.xticks(rotation=45)
+     plt.show()
+     ```
+
+     ![total-revenue-per-each-product-category]
+
+     > ***Food & Beverages has the lowest revenue at 82544.05, while electronics is the product category with the highest revenue at 2794148.72***
+
+   - The relationship between the price of the product and the payment value
+     ```
+     # Visualize with Scatter plot
+     plt.figure(figsize=(10, 7))
+     sns.scatterplot(x='price', y='payment_value', data=df_olist, color='green', alpha=0.5)
+     plt.title('Price vs. Payment Value')
+     plt.xlabel('Price (R$)')
+     plt.ylabel('Payment Value')
+    
+     # Calculate the regression coefficient and intercept
+     slope, intercept = np.polyfit(df_olist['price'], df_olist['payment_value'], 1)
+    
+     # Create an array of x-values for the linear trend line
+     x = np.array([df_olist['price'].min(), df_olist['price'].max()])
+    
+     # Create an array of y-values for the linear trend line using the regression equation
+     y = slope * x + intercept
+    
+     # Add a linear trend line to the plot
+     plt.plot(x, y, color='red', linestyle='--', label=f'Trendline: y = {slope:.2f}x + {intercept:.2f}')
+     plt.legend()
+     plt.show()
+     ```
+
+     ![relation-price-of-product-payment-value](img/price_vs_payment_value.png)
+
+     > ***- Positive Relationship: This visualization shows that there is a positive relationship between "price" and "payment_value," with the majority of the data points forming an upward pattern from left to right. Put another way, a product's payment value increases with its price.***
+     >
+     > ***- Outliers: Outliers are data points that deviate significantly from the general pattern. These outliers are transactions or high-priced products with a considerably higher payout value than other products. This could be a sign of some exceptional products or huge purchases that result in larger payments than the price.***
+     >
+     > ***- Data Concentration: The majority of the data points have relatively low price ranges and payment values. This shows that the majority of transactions involve the purchase of decently priced goods.***
+
+   - The relationship between Product Volume and the Price
+     ```
+     # Visualize with Scatter plot
+     plt.figure(figsize=(10, 7))
+     sns.scatterplot(x='product_volume_cm3', y='price', data=df_olist, color='blue', alpha=0.5)
+     plt.title('Scatter Plot Product Volume vs. Price')
+     plt.xlabel('Product Volume (cm3)')
+     plt.ylabel('Price (R$)')
+    
+     # Calculate the regression coefficient and intercept
+     slope, intercept = np.polyfit(df_olist['product_volume_cm3'], df_olist['price'], 1)
+    
+     # Create an array of x-values for the linear trend line
+     x = np.array([df_olist['product_volume_cm3'].min(), df_olist['product_volume_cm3'].max()])
+    
+     # Create an array of y-values for the linear trend line using the regression equation
+     y = slope * x + intercept
+    
+     # Add a linear trend line to the plot
+     plt.plot(x, y, color='red', linestyle='--', label=f'Trendline: y = {slope:.2f}x + {intercept:.2f}')
+     plt.legend()
+     plt.show()
+     ```
+
+     ![relation-product-volume-price](img/product_volume_vs_price.png)
+
+     > ***- Positive Relationship: This visualization shows that there is a positive relationship between "product_volume_cm3" and "price" with the majority of the data points forming an upward pattern from left to right. Put another way, a product volumes value increases with its price.***
+     >
+     > ***- Data Concentration: The majority of the data points have relatively small product volume and price. This shows that the majority of transactions involve the purchase of decently priced goods.***
+
+   - Average Price over Time by Product Category
+     ```
+     # Group the data by 'order_month' and 'product_category' and calculate the mean 'price'
+     avg_price = df_olist.groupby(['order_month', 'product_category'])['price'].mean().unstack()
+    
+     # Visualize with line plot
+     plt.figure(figsize=(12, 6))
+     for category in avg_price.columns:
+         plt.plot(avg_price.index, avg_price[category], label=category)
+    
+     plt.title('Average Price Over Time by Product Category')
+     plt.xlabel('Order Month')
+     plt.ylabel('Average Price')
+     plt.legend(loc='best', bbox_to_anchor=(1, 1))
+     plt.xticks(rotation=45)
+     plt.grid(True)
+     plt.show()
+     ```
+
+     ![avg-price-over-time-by-product-category](img/avg_price_over_time_by_product_category.png)
+
+     > ***From January 2017 to August 2018, the average price of each product category was in the range of 75–100 R$, except for the food & drink product category.***
+
+   - Payment Type Distribution
+     ```
+     # Visualize with pie plot
+     plt.figure(figsize=(10,10))
+     plt.pie(df_olist['payment_type'].value_counts().values, 
+            autopct='%1.1f%%', 
+            shadow=False, startangle=90,
+            labels=df_olist['payment_type'].value_counts().index)
+     plt.title('Payment Type Distribution')
+     plt.show()
+     ```
+
+     ![payment-type-distribution]
+
+     > ***It seems obvious that the majority of customers (73.9%) pay with credit cards while placing orders.***
+
+   - Payment Installment
+     ```
+     # Generate value count in payment_installment
+     df_olist['payment_installments'].value_counts()
+     ```
+
+     ```
+     Output:
+     payment_installments
+        1     49997
+        2     12038
+        3     10028
+        4      6685
+        5      4851
+        10     3919
+        6      3409
+        8      3277
+        7      1442
+        9       571
+        12      117
+        15       54
+        11       24
+        18       20
+        13       17
+        14       14
+        24       12
+        20       10
+        17        7
+        16        5
+        21        3
+        0         2
+        23        1
+        22        1
+        Name: count, dtype: int64
+     ```
+
+     ```
+     # Delete a value of 0 in the payment_installment column in the dataframe
+     df_olist = df_olist[df_olist['payment_installments'] !=0 ]
+    
+     df_olist.reset_index(drop=True, inplace=True)
+     ```
+
+     ```
+     # Visulisize payment installment with countplot
+     plt.figure(figsize=(10,6))
+     sns.countplot(x=df_olist['payment_installments'], palette='Set2')
+     plt.title('Payment Installement Distribution')
+     plt.xlabel('Month')
+     plt.show()
+     ```
+
+     ![payment-installment]
+
+     > ***It is apparent that the majority of clients (49997) pay by credit card in 1-month installments when placing an order.***
+     
       
+    
         
      
 
