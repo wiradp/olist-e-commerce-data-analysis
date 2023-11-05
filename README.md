@@ -296,16 +296,11 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       ```
       # Create Product Volume Column
       df_olist['product_volume_cm3'] = df_olist['product_length_cm'] * df_olist['product_height_cm'] * df_olist['product_width_cm']
-        
-      df_olist['product_volume_cm3'].head()
       ```
 
       ```
       # Drop columns length, heigth and width
       df_olist.drop(['product_length_cm','product_height_cm','product_width_cm'], axis=1, inplace=True)
-    
-      # Show dataframe
-      df_olist.head()
       ```
 
     - Outlier Identify
@@ -315,7 +310,9 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       ```
       ![df-describe](img/df-describe.png "df describe")
 
-      In the price column, it can be seen that the 75% data and the max data have a very large range. We can assume this is an outlier
+      > [!NOTE]
+      > _In the price column, it can be seen that the 75% data and the max data have a very large range. We can assume this is an outlier_
+   
       ```
       # Show distribution of data price
 
@@ -386,9 +383,12 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           # Filtering data without outliers
           df_olist = df_olist[df_olist['price'] < upper]
           ```
+          ![describe-price-wo-outlier](img/describe_price_wo_outlier.png)
 
-          > It can be seen that Q3 and the maximum value are not far apart
-
+          > [!NOTE]
+          > - _It can be seen that Q3 and the maximum value are not far apart._
+          > - _Outliers have been removed._
+          
           ```
           # Show distribution of data price without outlier
 
