@@ -383,10 +383,12 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           # Filtering data without outliers
           df_olist = df_olist[df_olist['price'] < upper]
           ```
+          ![describe-price-wo-outlier](img/describe_price_wo_outlier.png)
 
-          > _It can be seen that Q3 and the maximum value are not far apart_
-          > _Outliers have been removed_
-
+          > [!NOTE]
+          > - _It can be seen that Q3 and the maximum value are not far apart._
+          > - _Outliers have been removed._
+          
           ```
           # Show distribution of data price without outlier
 
