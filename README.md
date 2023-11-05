@@ -784,5 +784,5 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
 > 
 > :pushpin: _Thank you for taking the time to read this. Please feel free to offer feedback and recommendations. I am willing to talk about it._ :pray:
      
-      
+You can see in another easy report at my porfolio [Medium](https://medium.com/@wiradp/olist-e-commerce-data-analysis-d8530fb49c01)       
         
