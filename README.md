@@ -323,7 +323,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       plt.xlabel('Price')
       plt.show()
       ```
-      ![distribution-data-price](img/distribution-data-price.png)
+      ![distribution-data-price](img/distribution-data-price.png "Histogram Distribution Data Price")
 
       > [!NOTE]
       > - _It can be seen that the scale of the x axis reaches 7000._
@@ -340,7 +340,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       plt.show()
       ```
       
-      ![dist-data-price](img/dist_data_price_boxplot.png "Distribution Data Price")
+      ![dist-data-price](img/dist_data_price_boxplot.png "Boxplot Distribution Data Price")
       ```
       # Generate descriptive stastistic at column 'price'
       df_olist['price'].describe()
