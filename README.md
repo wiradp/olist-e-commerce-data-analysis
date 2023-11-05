@@ -320,12 +320,13 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Show distribution of data price
 
       plt.figure(figsize=(10, 7))
+      sns.set_theme(context='notebook', style='darkgrid', palette='deep', font='sans-serif', font_scale=1, color_codes=True, rc=None)
       sns.histplot(df_olist['price'], bins=100, palette='Set2')
       plt.title('Distribution of data price')
       plt.xlabel('Price')
       plt.show()
       ```
-      
+      ![distribution-data-price](img/distribution-data-price.png)
 
       > [!NOTE]
       > - _It can be seen that the scale of the x axis reaches 7000._
@@ -389,15 +390,16 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           > It can be seen that Q3 and the maximum value are not far apart
 
           ```
-          # Show distribution of data price
+          # Show distribution of data price without outlier
 
           plt.figure(figsize=(10,7))
+          sns.set_theme(context='notebook', style='darkgrid', palette='deep', font='sans-serif', font_scale=1, color_codes=True, rc=None)
           sns.histplot(df_olist['price'], bins=100)
           plt.title('Distribution of data price')
           plt.xlabel('Price')
           plt.show()
           ```
-          ![dist-data-price-wo-outlier](img/dist_data_price_wo_outlier.png "Distribution Data Price w/o outlier")
+          ![dist-data-price-wo-outlier](img/dist_data_price_boxplot.png "Distribution Data Price w/o outlier")
           > _Now the graphic looks positively skewed_
           
     - Identify inconsistent format
