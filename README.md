@@ -399,7 +399,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           plt.xlabel('Price')
           plt.show()
           ```
-          ![dist-data-price-wo-outlier](img/dist_data_price_boxplot.png "Distribution Data Price w/o outlier")
+          ![distribution-data-price-wo-outlier](img/dist_data_price_wo_outlier.png "Distribution data price w/o outlier")
           > _Now the graphic looks positively skewed_
           
     - Identify inconsistent format
