@@ -346,7 +346,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       df_olist['price'].describe()
       ```
   
-      ![describe-price-outlier](img/describe_price_outlier.png)
+      ![describe-price-outlier](img/describe_price_outlier.png "Describe Data Price with outlier")
       
       > [!NOTE]
       > - _It can be seen that the maximum value of the price column is 6735._
@@ -373,7 +373,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           # Filtering data without outliers
           df_olist = df_olist[df_olist['price'] < upper]
           ```
-          ![describe-price-wo-outlier](img/describe_price_wo_outlier.png)
+          ![describe-price-wo-outlier](img/describe_price_wo_outlier.png "Desbribe Data Price w/o outlier")
 
           > [!NOTE]
           > - _It can be seen that Q3 and the maximum value are not far apart._
@@ -400,7 +400,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       df_olist['product_category_name_english'].unique()
       ```
   
-      ![identify-inconsistent-format](img/identify_inconst_format.png)
+      ![identify-inconsistent-format](img/identify_inconst_format.png "Product Category Name Unique")
       ```
       # Create a varialbe to replace inconsistent name
       replace_product_name = {'home_confort':'home_comfort', 'home_comfort_2':'home_comfort', 'home_appliances_2':'home_appliances'}
@@ -413,12 +413,9 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Generate unique value in column order_purchase_timestamp 
       df_olist['order_purchase_timestamp'].unique()
       ```
-      ```
-      Output:
-      array(['2017-05-16 15:05:35', '2017-11-09 00:50:13',
-       '2017-05-07 20:11:26', ..., '2017-05-17 17:44:34',
-       '2017-01-26 11:09:00', '2017-09-17 16:51:43'], dtype=object)
-      ```
+      
+      ![order-purchase-timestamp-unique](img/order_purchase_time_unique.png "Order Purchase Timestamp Unique")
+      
       > [!NOTE]
       > - _From the information above, it can be seen that the column does not match the representation of the data type of the column_
       > - _order_purchase_timestamp: Indicates the purchase timestamp._
@@ -432,7 +429,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Check duplicate data of dataframe
       df_olist[df_olist.duplicated(keep=False)]
       ```
-      ![df_cuplicate](img/duplicate_df.png)
+      ![df_cuplicate](img/duplicate_df.png "Duplicate dataframe")
 
       ```
       # Delete duplicate data
@@ -456,8 +453,10 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
             ax.text(value, index, f'{value}', ha='left', va='center')
      plt.show()
      ```
-     ![no-each-product-ccategory](img/no_of_order_per_each_category.png)
+     ![no-each-product-ccategory](img/no_of_order_per_each_category.png "Number of order per each category")
+     
      > ***Electronics as the most ordered product category with 25033 orders and food & drinks as the least ordered product category with 1008 orders.***
+     
    - The most item in product categories
      ```
      # Filter max value count in product category
@@ -492,7 +491,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      ax.text(max_category_count, 0, f'{max_category_count}', ha='right', va='center', fontsize=10)
      plt.show()
      ```
-     ![most-item-product-category](img/product_category_in_electronic.png)
+     ![most-item-product-category](img/product_category_in_electronic.png "Product category of Electronic")
      > ***The most ordered electronic product category, totaling 6740, turned out to be computer accessories.***
      
    - Top 3 for Each Product Category Name by Product Category
@@ -511,7 +510,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.title('Top 3 Product Categories by Product Category')
      plt.show()
      ```
-     ![top-3-each-product-category](img/top_3_item_by_product_category.png)
+     ![top-3-each-product-category](img/top_3_item_by_product_category.png "Top 3 item by product category")
      
      > ***Health Beauty, Stationery, Computer accessories, Sport Leisure, Cool Stuff, Food, Bed Bath Table, Housewares, Construction tools construction are the most item ordered for each product category***
 
@@ -523,7 +522,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.title('Top 10 Customer State Capacity')
      plt.show()
      ```
-     ![top-10-customer-state-capacity](img/top_10_customer_state_capacity.png)
+     ![top-10-customer-state-capacity](img/top_10_customer_state_capacity.png "Top 10 customer state capacity")
 
      > ***It can be seen that the state SP (São Paulo) is the country that makes the most orders of 41115***
 
@@ -545,7 +544,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![total-revenue-each-state](img/total_revenue_per_state.png)
+     ![total-revenue-each-state](img/total_revenue_per_state.png "Total Revenue per State")
 
      > ***SP(São Paulo) is the state with the highest revenue of 4493263.20 and RR (Roraima) has the lowest revenue of 6678.50***
 
@@ -584,7 +583,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![monthly-revenue](img/monthly_revenue.png)
+     ![monthly-revenue](img/monthly_revenue.png "Total Monthly Revenue")
 
      > ***It is apparent that November 2017 had the largest revenue, totaling 879899.45, while December 2012 had the lowest revenue, totaling 19.62***
 
@@ -606,7 +605,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![total-revenue-per-each-product-category](img/total_revenue_per_each_product_category.png)
+     ![total-revenue-per-each-product-category](img/total_revenue_per_each_product_category.png "Total Revenue per each product category")
 
      > ***Food & Beverages has the lowest revenue at 82544.05, while electronics is the product category with the highest revenue at 2794148.72***
 
@@ -634,7 +633,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![relation-price-of-product-payment-value](img/price_vs_payment_value.png)
+     ![relation-price-of-product-payment-value](img/price_vs_payment_value.png "Price vs Payment Value")
 
      > ***- Positive Relationship: This visualization shows that there is a positive relationship between "price" and "payment_value," with the majority of the data points forming an upward pattern from left to right. Put another way, a product's payment value increases with its price.***
      >
@@ -666,7 +665,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![relation-product-volume-price](img/product_volume_vs_price.png)
+     ![relation-product-volume-price](img/product_volume_vs_price.png "Product Volume vs Price")
 
      > ***- Positive Relationship: This visualization shows that there is a positive relationship between "product_volume_cm3" and "price" with the majority of the data points forming an upward pattern from left to right. Put another way, a product volumes value increases with its price.***
      >
@@ -691,7 +690,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![avg-price-over-time-by-product-category](img/avg_price_over_time_by_product_category.png)
+     ![avg-price-over-time-by-product-category](img/avg_price_over_time_by_product_category.png "Avg price over time by product category")
 
      > ***From January 2017 to August 2018, the average price of each product category was in the range of 75–100 R$, except for the food & drink product category.***
 
@@ -707,7 +706,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![payment-type-distribution](img/payment_type_dist.png)
+     ![payment-type-distribution](img/payment_type_dist.png "Payment type")
 
      > ***It seems obvious that the majority of customers (73.9%) pay with credit cards while placing orders.***
 
@@ -763,7 +762,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
 
-     ![payment-installment](img/payment_installment_dist.png)
+     ![payment-installment](img/payment_installment_dist.png "Payment Installment")
 
      > ***It is apparent that the majority of clients (49997) pay by credit card in 1-month installments when placing an order.***
 
