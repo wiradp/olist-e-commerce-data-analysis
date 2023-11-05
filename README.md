@@ -325,7 +325,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       plt.xlabel('Price')
       plt.show()
       ```
-      ![dist-data-price](img/dist_data_price_hisplot.png "Distribution Data Price")
+      
 
       > [!NOTE]
       > - _It can be seen that the scale of the x axis reaches 7000._
@@ -407,34 +407,8 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Show the data
       df_olist['product_category_name_english'].unique()
       ```
-      ```
-      Output:
-      array(['office_furniture', 'housewares', 'home_confort', 'sports_leisure',
-       'computers_accessories', 'toys', 'furniture_decor', 'auto',
-       'air_conditioning', 'telephony', 'health_beauty', 'garden_tools',
-       'pet_shop', 'bed_bath_table', 'baby', 'watches_gifts',
-       'kitchen_dining_laundry_garden_furniture', 'perfumery', 'art',
-       'stationery', 'fashio_female_clothing', 'consoles_games',
-       'construction_tools_lights', 'food_drink', 'drinks', 'cool_stuff',
-       'fashion_bags_accessories', 'home_construction',
-       'luggage_accessories', 'electronics', 'home_appliances_2',
-       'fashion_male_clothing', 'small_appliances',
-       'small_appliances_home_oven_and_coffee', 'books_general_interest',
-       'home_appliances', 'costruction_tools_tools',
-       'signaling_and_security', 'musical_instruments',
-       'construction_tools_construction', 'music', 'fashion_shoes',
-       'industry_commerce_and_business', 'fashion_underwear_beach',
-       'dvds_blu_ray', 'construction_tools_safety', 'food',
-       'fixed_telephony', 'furniture_living_room',
-       'tablets_printing_image', 'market_place', 'christmas_supplies',
-       'agro_industry_and_commerce', 'costruction_tools_garden',
-       'computers', 'furniture_bedroom', 'audio', 'books_imported',
-       'books_technical', 'party_supplies',
-       'furniture_mattress_and_upholstery', 'la_cuisine', 'flowers',
-       'diapers_and_hygiene', 'cine_photo', 'cds_dvds_musicals',
-       'fashion_sport', 'home_comfort_2', 'arts_and_craftmanship',
-       'fashion_childrens_clothes', 'security_and_services'], dtype=object)
-      ```
+  
+      ![identify-inconsistent-format](img/identify_inconst_format.png)
       ```
       # Create a varialbe to replace inconsistent name
       replace_product_name = {'home_confort':'home_comfort', 'home_comfort_2':'home_comfort', 'home_appliances_2':'home_appliances'}
