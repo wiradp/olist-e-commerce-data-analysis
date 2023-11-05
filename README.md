@@ -345,19 +345,9 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Generate descriptive stastistic at column 'price'
       df_olist['price'].describe()
       ```
-
-      ```
-      Output:
-      count    7.416192e+06
-      mean     1.209247e+02
-      std      1.842164e+02
-      min      8.500000e-01
-      25%      3.990000e+01
-      50%      7.490000e+01
-      75%      1.349000e+02
-      max      6.735000e+03
-      Name: price, dtype: float64
-      ```
+  
+      ![describe-price-outlier](img/describe_price_outlier.png)
+      
       > [!NOTE]
       > - _It can be seen that the maximum value of the price column is 6735._
       > - _This number is very far compared to the Q3 value of 1349._
