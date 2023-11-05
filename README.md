@@ -3,7 +3,7 @@
 This is a Pacmann Academy SQL & Data Wrangling project involving visual examination of datasets, problem identification, and problem solving. 
 First, introduce the Olist company and the datasets. Olist is a Brazilian e-commerce company that provides solutions for online sales and e-commerce services. It offers a variety of technologies, tools, and connectors to help streamline and speed online business processes. Finally, provide remedies to the challenges and a benefit evaluation. The Python programming language is utilized in this project for data analysis and graphics.
 
-> Disclaimer : I'am using dataset from learning management system in Pacmann Academy, but we can use the same dataset from [kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/download?datasetVersionNumber=2)
+> :warning: Disclaimer: I'm using a dataset from Pacmann Academy's learning management system, but we may use the same dataset from [kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/download?datasetVersionNumber=2)
 
 ![olist](img/olist-img.jpg)
 
