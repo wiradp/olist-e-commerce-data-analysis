@@ -3,7 +3,7 @@
 This is a Pacmann Academy SQL & Data Wrangling project involving visual examination of datasets, problem identification, and problem solving. 
 First, introduce the Olist company and the datasets. Olist is a Brazilian e-commerce company that provides solutions for online sales and e-commerce services. It offers a variety of technologies, tools, and connectors to help streamline and speed online business processes. Finally, provide remedies to the challenges and a benefit evaluation. The Python programming language is utilized in this project for data analysis and graphics.
 
-> Disclaimer : I'am using dataset from learning management system in Pacmann Academy, but we can use the same dataset from [kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/download?datasetVersionNumber=2)
+> :warning: Disclaimer: I'm using a dataset from Pacmann Academy's learning management system, but we may use the same dataset from [kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/download?datasetVersionNumber=2)
 
 ![olist](img/olist-img.jpg)
 
@@ -320,12 +320,13 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
       # Show distribution of data price
 
       plt.figure(figsize=(10, 7))
+      sns.set_theme(context='notebook', style='darkgrid', palette='deep', font='sans-serif', font_scale=1, color_codes=True, rc=None)
       sns.histplot(df_olist['price'], bins=100, palette='Set2')
       plt.title('Distribution of data price')
       plt.xlabel('Price')
       plt.show()
       ```
-      
+      ![distribution-data-price](img/distribution-data-price.png)
 
       > [!NOTE]
       > - _It can be seen that the scale of the x axis reaches 7000._
@@ -389,15 +390,16 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
           > It can be seen that Q3 and the maximum value are not far apart
 
           ```
-          # Show distribution of data price
+          # Show distribution of data price without outlier
 
           plt.figure(figsize=(10,7))
+          sns.set_theme(context='notebook', style='darkgrid', palette='deep', font='sans-serif', font_scale=1, color_codes=True, rc=None)
           sns.histplot(df_olist['price'], bins=100)
           plt.title('Distribution of data price')
           plt.xlabel('Price')
           plt.show()
           ```
-          ![dist-data-price-wo-outlier](img/dist_data_price_wo_outlier.png "Distribution Data Price w/o outlier")
+          ![distribution-data-price-wo-outlier](img/dist_data_price_wo_outlier.png "Distribution data price w/o outlier")
           > _Now the graphic looks positively skewed_
           
     - Identify inconsistent format
@@ -501,7 +503,7 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      plt.show()
      ```
      ![most-item-product-category](img/product_category_in_electronic.png)
-     > ***The product category's most ordered items, totaling 6740, are evidently computer accessories.***
+     > ***The most ordered electronic product category, totaling 6740, turned out to be computer accessories.***
      
    - Top 3 for Each Product Category Name by Product Category
      ```
@@ -774,12 +776,24 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
      ![payment-installment](img/payment_installment_dist.png)
 
      > ***It is apparent that the majority of clients (49997) pay by credit card in 1-month installments when placing an order.***
-     
-      
-    
-        
-     
 
+# Conclusions
+- With 25,033 orders, the "Electronics" product category was the most popular, and with only 1,008 orders, the "Food & Beverage" category had the lowest number of orders. In order to meet the increased demand for products in the "Electronics" category, Olist may think about growing or adding to its inventory. Furthermore, it can enhance the promotion of the "Food & Beverage" category to increase consumer interest in it.
+- "Computer Accessories" was the most ordered "Electronics" product category, with a total of 6,740 orders. Emphasizing the product "Computer Accessories" might boost the popularity of the category "Electronics." Olist may think of developing and marketing such products.
+- There are some products in certain categories that are extremely well-liked. Knowing this can assist in concentrating these products' marketing and promotion. By offering sales, discounts, or customer interaction, Olist can highlight the best-selling items in each category.
+- The state of SP (So Paulo) got the most orders, at 41,115. Olist can focus more on clients in SP state and increase services or promotions in this region.
+- SP (So Paulo) has the greatest income, while RR (Roraima) has the lowest. Concentrating on the state of SP may result in more revenue. Olist may consider increased marketing or customer service efforts in these states.
+- November 2017 was when Olist's revenue peaked. Planning inventory and marketing can be made easier by having a thorough understanding of monthly trends. Olist has the ability to modify their sales tactics in order to maximize profits throughout high season.
+- The revenue contribution that was highest in the "Electronics" category was lowest in the "Food & Beverage" category. Since "Electronics" is a profitable category, Olist should highlight more of these items.
+- Prices for products and payment values are positively correlated. A substantial purchase with a greater payment value is indicated by an anomaly. Olist can boost its income by concentrating on large, expensive purchases. Offering goods that are highly valued for their money can receive extra attention.
+- The price and volume of a product are positively correlated. Most of the transactions are for relatively inexpensive and low-volume products. To boost income, Olist can think about offering product packages at bigger quantities and costs.
+- Average prices fluctuate within a certain product category, and understanding this might aid with product pricing. Olist can alter product prices in specific categories to maximize income.
+- The most popular method of payment for Olist users is credit card. Olist can keep processing credit card payments and providing specials or incentives for using this payment method.
+- The majority of consumers pay by credit card in one-month payments. Olist can provide more installment payment choices to clients and promote the benefits to them.
+     
+> :pushpin: _We can use this dataset to do a more in-depth investigation. We can study more from this information in the future, but for now, we'll stick to 12 objectives._ :handshake:
+> 
+> :pushpin: _Thank you for taking the time to read this. Please feel free to offer feedback and recommendations. I am willing to talk about it._ :pray:
      
       
         
