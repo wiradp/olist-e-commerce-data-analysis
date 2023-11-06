@@ -779,10 +779,14 @@ First, introduce the Olist company and the datasets. Olist is a Brazilian e-comm
 - Average prices fluctuate within a certain product category, and understanding this might aid with product pricing. Olist can alter product prices in specific categories to maximize income.
 - The most popular method of payment for Olist users is credit card. Olist can keep processing credit card payments and providing specials or incentives for using this payment method.
 - The majority of consumers pay by credit card in one-month payments. Olist can provide more installment payment choices to clients and promote the benefits to them.
+
+  > ***We examined several facets of Olist's operations in this analysis. We found patterns and trends in everything from the population of products to consumer payments that can assist Olist in growing its revenue and business. Some tactics that can be used are to draw attention to the in-demand "Electronics" product category, promote "Computer Accessories" more, optimize product pricing across categories, and keep credit card payments supported with exclusive offers. Growth also hinges on increasing customer service and promotions in states like SP (São Paulo) that contribute the most to state revenue. Olist is able to boost revenue more successfully and economically as a result.***
      
+> [!NOTE]
 > :pushpin: _We can use this dataset to do a more in-depth investigation. We can study more from this information in the future, but for now, we'll stick to 12 objectives._ :handshake:
-> 
-> :pushpin: _Thank you for taking the time to read this. Please feel free to offer feedback and recommendations. I am willing to talk about it._ :pray:
      
-You can see in another easy report at my portfolio [Medium](https://medium.com/@wiradp/olist-e-commerce-data-analysis-d8530fb49c01)       
+You can see in another easy report at my portfolio [Medium](https://medium.com/@wiradp/olist-e-commerce-data-analysis-d8530fb49c01) 
+
+## Thank you for taking the time to read this.
+I'm learning to write, and mistakes are inescapable even when I do my hardest. Please feel free to offer feedback and recommendations. Let me know if you spot any difficulties or mistakes :pray:
         
